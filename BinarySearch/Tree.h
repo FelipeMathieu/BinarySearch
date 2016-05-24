@@ -6,7 +6,7 @@ using namespace std;
 
 typedef struct Node
 {
-	int element;
+	long int element;
 	Node *right, *left;
 };
 
@@ -16,15 +16,15 @@ class Tree
 private:
 
 	Node *root;
-	void insertNode(int e, Node *leaf);
-	Node *removeElement(Node *t, int e);
+	void insertNode(long int e, Node *leaf);
+	Node *removeElement(Node *t, long int e);
 
 public:
 	Tree();
 	~Tree();
 
-	void insert(int e);
-	int search(int e, Node *aux);
+	void insert(long int e);
+	int search(long int e, Node *aux);
 	void printPreOrder(Node *t);
 	void printInOrder(Node *t);
 	void printPostOrder(Node *t);
@@ -35,10 +35,10 @@ public:
 	int height(Node *t);
 	int difHeight(Node *t);
 	Node *balance(Node *t);
-	void display(Node *t, int lvl);
+	void display(Node *t, long int lvl);
 	Node *rightRotate(Node *t);
 	Node *leftRotate(Node *t);
 	Node *leftRightRotate(Node *t);
 	Node *rightLeftRotate(Node *t);
-	void remove(Node *t, int e);
+	void remove(Node *t, long int e);
 };

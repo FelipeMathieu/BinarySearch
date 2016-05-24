@@ -1,8 +1,35 @@
 #include "bSearch.h"
 #include "Tree.h"
-#include <cstdlib>
 #include <Windows.h>
 #include <vector>
+#include <stdlib.h>
+
+void quickSort(vector<long int> *v, int left, int right) {
+	int i = left, j = right;
+	int tmp;
+	int pivot = v->at((left + right) / 2);
+
+	/* partition */
+	while (i <= j) {
+		while (v->at(i) < pivot)
+			i++;
+		while (v->at(j) > pivot)
+			j--;
+		if (i <= j) {
+			tmp = v->at(i);
+			v->at(i) = v->at(j);
+			v->at(j) = tmp;
+			i++;
+			j--;
+		}
+	};
+
+	/* recursion */
+	if (left < j)
+		quickSort(v, left, j);
+	if (i < right)
+		quickSort(v, i, right);
+}
 
 void main()
 {
@@ -12,8 +39,9 @@ void main()
 	clock_t k1 = NULL, m1 = NULL, result1 = NULL;
 	float r, r1;
 	Tree *A = new Tree();
+	Node *auxTree = new Node();
 	bSearch b;
-	vector<int> *v = new vector<int>;
+	vector<long int> v, v2;
 
 	cout << "Informe o numero de elementos: ";
 	cin >> size;
@@ -22,15 +50,25 @@ void main()
 
 	for (int i = 0; i < size; i++)
 	{
-		element = rand() % RAND_MAX;
+		//cout << element << " ";
+		element = (rand()*rand());
 
 		k += clock();
 		A->insert(element);
 		m += clock();
 
 		k1 += clock();
-		v->push_back(element);
+		v.push_back(element);
 		m1 += clock();
+	}
+
+	element = 0;
+
+	for (int i = 0; i < size; i++)
+	{
+		element = (rand()*rand());
+
+		v2.push_back(element);
 	}
 
 	result = m - k;
@@ -59,7 +97,7 @@ void main()
 	
 	k = clock();
 
-	A->balance(A->Root());
+	auxTree = A->balance(A->Root());
 
 	m = clock();
 
@@ -74,18 +112,7 @@ void main()
 
 	k1 = clock();
 
-	for (int i = 0; i < size; i++) 
-	{
-		for (int j = size - 1; j > i; j--) 
-		{
-			if (v->at(j) < v->at(j - 1))
-			{
-				aux = v->at(j);
-				v->at(j) = v->at(j - 1);
-				v->at(j - 1) = aux;
-			}	
-		}
-	}
+	quickSort(&v, 0, size - 1);
 
 	m1 = clock();
 
@@ -94,13 +121,10 @@ void main()
 
 	cout << "Tempo de ordenacao do vetor: " << r1 << endl << endl;
 
-	cout << endl;
-
 	Sleep(0.100);
 
-	cout << "Qual elemento deseja procurar: ";
-	cin >> element;
-	cout << endl;
+	cout << "A partir das chaves, do vetor2 aleatorio:" << endl;
+	cout << "Procurando chaves na arvore e no vetor1..." << endl << endl;
 
 	k = NULL;
 	m = NULL;
@@ -112,7 +136,7 @@ void main()
 
 	k = clock();
 
-	b.bSearch_Tree(A->Root(), element);
+	b.bSearch_Tree(auxTree, size, v2);
 
 	m = clock();
 	result = m - k;
@@ -122,7 +146,7 @@ void main()
 
 	k1 = clock();
 
-	b.bSearch_vector(v, element, size);
+	b.bSearch_vector(v, size, v2);
 
 	m1 = clock();
 
@@ -130,4 +154,6 @@ void main()
 	r1 = ((float)result1) / CLOCKS_PER_SEC;
 
 	cout << "Tempo de execucao da busca no vetor: " << r1 << endl << endl;
+
+	free(A);
 }

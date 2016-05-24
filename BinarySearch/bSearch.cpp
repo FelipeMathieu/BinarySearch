@@ -1,24 +1,24 @@
 #include "bSearch.h"
 
-void bSearch::bSearch_Tree(Node *t, int e)
+void bSearch::bSearch_Tree(Node *t, int size, vector<long int> v1)
 {
 	int count = 0;
 	Node *t1 = t;
 
-	for (int i = 0; i <= e; i++)
+	for (int i = 0; i < size; i++)
 	{
 		while (t != NULL)
 		{
-			if (i == t->element)
+			if (v1.at(i) == t->element)
 			{
 				count += 1;
 				break;
 			}
-			else if (i < t->element)
+			else if (v1.at(i) < t->element)
 			{
 				t = t->left;
 			}
-			else if (i > t->element)
+			else if (v1.at(i) > t->element)
 			{
 				t = t->right;
 			}
@@ -26,26 +26,28 @@ void bSearch::bSearch_Tree(Node *t, int e)
 		t = t1;
 	}
 
-	cout << "De 0 ate " << e << " procurados na arvore. " << count << " elementos pertencem a arvore." << endl;
+	free(t1);
+
+	cout << "Existem " << count << " chaves do vetor1 na arvore." << endl;
 }
 
-void bSearch::bSearch_vector(vector<int> *v, int e, int size)
+void bSearch::bSearch_vector(vector<long int> v, int size, vector<long int> v1)
 {
 	int meio, primeiro, ultimo, count = 0;
 
-	ultimo = size;
+	ultimo = size-1;
 	meio = size / 2;
 	primeiro = 0;
 
-	for (int i = 0; i <= e; i++)
+	for (int i = 0; i < size; i++)
 	{
 		while (primeiro <= ultimo)
 		{
-			if (v->at(meio) < i)
+			if (v.at(meio) < v1.at(i))
 			{
 				primeiro = meio + 1;
 			}
-			else if (v->at(meio) == i)
+			else if (v.at(meio) == v1.at(i))
 			{
 				count += 1;
 				break;
@@ -58,10 +60,10 @@ void bSearch::bSearch_vector(vector<int> *v, int e, int size)
 			meio = (primeiro + ultimo) / 2;
 		}
 
-		ultimo = size;
+		ultimo = size-1;
 		meio = size / 2;
 		primeiro = 0;
 	}
 
-	cout << "De 0 ate " << e << " procurados no vetor. " << count << " elementos pertencem ao vetor." << endl;
+	cout << "Existem " << count << " chaves do vetor2 no vetor1." << endl;
 }

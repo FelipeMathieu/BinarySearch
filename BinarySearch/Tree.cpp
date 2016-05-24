@@ -9,7 +9,7 @@ Tree::~Tree()
 {
 }
 
-void Tree::insert(int e)
+void Tree::insert(long int e)
 {
 	if (this->root != NULL)
 	{
@@ -22,7 +22,7 @@ void Tree::insert(int e)
 	}
 }
 
-void Tree::insertNode(int e, Node *leaf)
+void Tree::insertNode(long int e, Node *leaf)
 {
 	Node *aux = NULL;
 
@@ -55,7 +55,7 @@ void Tree::insertNode(int e, Node *leaf)
 	//root = balance(root);
 }
 
-int Tree::search(int e, Node *aux)
+int Tree::search(long int e, Node *aux)
 {
 	if (aux != NULL)
 	{
@@ -196,7 +196,7 @@ Node *Tree::balance(Node *t)
 	return t;
 }
 
-void Tree::display(Node *t, int lvl)
+void Tree::display(Node *t, long int lvl)
 {
 	int i;
 
@@ -259,7 +259,7 @@ Node *Tree::rightLeftRotate(Node *t)
 	return leftRotate(t);
 }
 
-void Tree::remove(Node *t, int e)
+void Tree::remove(Node *t, long int e)
 {
 	int aux;
 
@@ -291,7 +291,7 @@ void Tree::remove(Node *t, int e)
 	}
 }
 
-Node *Tree::removeElement(Node *t, int e)
+Node *Tree::removeElement(Node *t, long int e)
 {
 	if (t == NULL)
 	{
