@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <algorithm>
+#include <fstream>
 
 using namespace std;
 
@@ -41,4 +42,7 @@ public:
 	Node *leftRightRotate(Node *t);
 	Node *rightLeftRotate(Node *t);
 	void remove(Node *t, long int e);
+	void saveTreeInOrder(Node *t, ostream &out);
+	void saveTreePreOrder(Node *t, ostream &out);
+	void saveTreePostOrder(Node *t, ostream &out);
 };

@@ -338,3 +338,39 @@ Node *Tree::removeElement(Node *t, long int e)
 	}
 	return t;
 }
+
+void Tree::saveTreeInOrder(Node *t, ostream &out)
+{
+	int i;
+
+	if (t != NULL)
+	{
+		saveTreeInOrder(t->left, out);
+		out << t->element << " |";
+		saveTreeInOrder(t->right, out);
+	}
+}
+
+void Tree::saveTreePostOrder(Node *t, ostream &out)
+{
+	int i;
+
+	if (t != NULL)
+	{
+		saveTreeInOrder(t->left, out);
+		saveTreeInOrder(t->right, out);
+		out << t->element << " |";
+	}
+}
+
+void Tree::saveTreePreOrder(Node *t, ostream &out)
+{
+	int i;
+
+	if (t != NULL)
+	{
+		out << t->element << " |";
+		saveTreeInOrder(t->left, out);
+		saveTreeInOrder(t->right, out);
+	}
+}

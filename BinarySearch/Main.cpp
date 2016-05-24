@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <vector>
 #include <stdlib.h>
+#include <fstream>
 
 void quickSort(vector<long int> *v, int left, int right) {
 	int i = left, j = right;
@@ -42,6 +43,7 @@ void main()
 	Node *auxTree = new Node();
 	bSearch b;
 	vector<long int> v, v2;
+	ofstream arvore, vetor;
 
 	cout << "Informe o numero de elementos: ";
 	cin >> size;
@@ -50,7 +52,6 @@ void main()
 
 	for (int i = 0; i < size; i++)
 	{
-		//cout << element << " ";
 		element = (rand()*rand());
 
 		k += clock();
@@ -121,9 +122,43 @@ void main()
 
 	cout << "Tempo de ordenacao do vetor: " << r1 << endl << endl;
 
-	Sleep(0.100);
+	cout << "Salvando arvore..." << endl << endl;
 
-	cout << "A partir das chaves, do vetor2 aleatorio:" << endl;
+	arvore.open("ArvoreInOrder.txt");
+	A->saveTreeInOrder(auxTree, arvore);
+	arvore.close();
+
+	arvore.open("ArvorePreOrder.txt");
+	A->saveTreePreOrder(auxTree, arvore);
+	arvore.close();
+
+	arvore.open("ArvorePostOrder.txt");
+	A->saveTreePostOrder(auxTree, arvore);
+	arvore.close();
+
+	cout << "Salvando Vetor..." << endl;
+
+	vetor.open("Vetor.txt");
+	for (int i = 0; i < size; i++)
+	{
+		vetor << v.at(i) << " |";
+	}
+	cout << endl;
+	vetor.close();
+
+	cout << "Salvando Vetor de comparacao..." << endl;
+
+	vetor.open("VetorComparacao.txt");
+	for (int i = 0; i < size; i++)
+	{
+		vetor << v2.at(i) << " |";
+	}
+	cout << endl;
+	vetor.close();
+
+	Sleep(0.1000);
+
+	cout << "Usando chaves do vetor2:" << endl;
 	cout << "Procurando chaves na arvore e no vetor1..." << endl << endl;
 
 	k = NULL;
@@ -156,4 +191,6 @@ void main()
 	cout << "Tempo de execucao da busca no vetor: " << r1 << endl << endl;
 
 	free(A);
+
+	system("pause");
 }

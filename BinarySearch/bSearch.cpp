@@ -28,7 +28,7 @@ void bSearch::bSearch_Tree(Node *t, int size, vector<long int> v1)
 
 	free(t1);
 
-	cout << "Existem " << count << " chaves do vetor1 na arvore." << endl;
+	cout << "Existem " << count << " chaves do vetor2 na arvore." << endl;
 }
 
 void bSearch::bSearch_vector(vector<long int> v, int size, vector<long int> v1)
