@@ -2,72 +2,66 @@
 
 void bSearch::bSearch_Tree(Node *t, int e)
 {
-	//clock_t i = NULL, j = NULL, w = NULL;
-	//float y;
-	bool aux = false;
+	int count = 0;
+	Node *t1 = t;
 
-	while (t != NULL)
+	for (int i = 0; i <= e; i++)
 	{
-		//i += clock();
-		if (e == t->element)
+		while (t != NULL)
 		{
-			aux = true;
-			//j += clock();
-			break;
+			if (i == t->element)
+			{
+				count += 1;
+				break;
+			}
+			else if (i < t->element)
+			{
+				t = t->left;
+			}
+			else if (i > t->element)
+			{
+				t = t->right;
+			}
 		}
-		else if (e < t->element)
-		{
-			t = t->left;
-		}
-		else if(e > t->element)
-		{
-			t = t->right;
-		}
-		//j += clock();
+		t = t1;
 	}
 
-	/*w = j - i;
-	y = ((float)w )/ CLOCKS_PER_SEC;*/
-
-	if(aux)
-	{
-		cout << "Elemento " << e << " pertence a arvore!" << endl;
-	}
-	else
-	{
-		cout << "Elemento " << e << " nao pertence a arvore!" << endl;
-	}
+	cout << "De 0 ate " << e << " procurados na arvore. " << count << " elementos pertencem a arvore." << endl;
 }
 
 void bSearch::bSearch_vector(vector<int> *v, int e, int size)
 {
-	int meio, primeiro, ultimo;
+	int meio, primeiro, ultimo, count = 0;
 
 	ultimo = size;
 	meio = size / 2;
 	primeiro = 0;
 
-	while (primeiro <= ultimo)
+	for (int i = 0; i <= e; i++)
 	{
-		if (v->at(meio) < e)
+		while (primeiro <= ultimo)
 		{
-			primeiro = meio + 1;
-		}
-		else if (v->at(meio) == e)
-		{
-			cout << "Elemento " << e << " existe no vetor!" << endl;
-			break;
-		}
-		else
-		{
-			ultimo = meio - 1;
+			if (v->at(meio) < i)
+			{
+				primeiro = meio + 1;
+			}
+			else if (v->at(meio) == i)
+			{
+				count += 1;
+				break;
+			}
+			else
+			{
+				ultimo = meio - 1;
+			}
+
+			meio = (primeiro + ultimo) / 2;
 		}
 
-		meio = (primeiro + ultimo) / 2;
+		ultimo = size;
+		meio = size / 2;
+		primeiro = 0;
 	}
 
-	if (primeiro > ultimo)
-	{
-		cout << "Elemento " << e << " nao existe no vetor!" << endl;
-	}
+	cout << "De 0 ate " << e << " procurados no vetor. " << count << " elementos pertencem ao vetor." << endl;
 }
